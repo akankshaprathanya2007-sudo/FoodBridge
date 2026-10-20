@@ -1,0 +1,461 @@
+/* =======================================================
+   AUTH.CSS
+   =======================================================
+   Styles for role selection, login, and the donor/NGO
+   registration pages. Loaded after style.css so it can
+   reuse the color/spacing variables defined there.
+   ======================================================= */
+
+/* -------------------------------------------------
+   SHARED FORM FIELD STYLES
+   (also reused later by Add Food, Profile, etc.)
+-------------------------------------------------- */
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-ink);
+}
+
+.form-group .hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  margin-top: var(--space-1);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+  outline: none;
+}
+
+select.form-control {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-ink-soft) 50%),
+    linear-gradient(135deg, var(--color-ink-soft) 50%, transparent 50%);
+  background-position: calc(100% - 20px) center, calc(100% - 15px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-control.error {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px var(--color-danger-soft);
+}
+
+.field-error {
+  display: none;
+  color: var(--color-danger);
+  font-size: 0.8rem;
+  margin-top: var(--space-1);
+}
+
+.field-error.show {
+  display: block;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.form-section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: var(--space-6) 0 var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.form-section-title:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Password input with show/hide icon */
+.password-field {
+  position: relative;
+}
+
+.password-field .form-control {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0.25rem;
+}
+
+/* Password strength meter */
+.strength-meter {
+  display: flex;
+  gap: 4px;
+  margin-top: var(--space-2);
+}
+
+.strength-meter .bar {
+  height: 5px;
+  flex: 1;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+  transition: background 0.2s ease;
+}
+
+.strength-label {
+  display: block;
+  font-size: 0.78rem;
+  margin-top: var(--space-1);
+  color: var(--color-ink-soft);
+}
+
+.strength-weak .bar:nth-child(1) { background: var(--color-danger); }
+.strength-fair .bar:nth-child(1),
+.strength-fair .bar:nth-child(2) { background: var(--color-accent); }
+.strength-good .bar:nth-child(1),
+.strength-good .bar:nth-child(2),
+.strength-good .bar:nth-child(3) { background: var(--color-accent-dark); }
+.strength-strong .bar { background: var(--color-primary); }
+
+/* Checkbox row (terms & conditions, food safety confirmations) */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.checkbox-row label {
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  font-weight: 400;
+}
+
+.checkbox-row a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Form footer note */
+.form-footer-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  margin-top: var(--space-5);
+}
+
+.form-footer-note a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Success / info banners inside forms */
+.form-banner {
+  display: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-4);
+}
+
+.form-banner.show {
+  display: block;
+}
+
+.form-banner.success {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.form-banner.error {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+/* -------------------------------------------------
+   AUTH SPLIT LAYOUT (login + register pages)
+-------------------------------------------------- */
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+}
+
+.auth-visual {
+  background: var(--color-primary-dark);
+  color: #fff;
+  padding: var(--space-7) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.auth-visual .navbar-logo {
+  color: #fff;
+}
+
+.auth-visual-copy h2 {
+  color: #fff;
+  margin-top: var(--space-7);
+}
+
+.auth-visual-copy p {
+  color: #cfe0d3;
+}
+
+.auth-visual-points {
+  margin-top: var(--space-6);
+}
+
+.auth-visual-points li {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: #dcebe0;
+  font-size: 0.92rem;
+}
+
+.auth-visual-points .check {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.auth-visual-foot {
+  font-size: 0.8rem;
+  color: #9fc0a8;
+}
+
+.auth-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-7) var(--space-6);
+  overflow-y: auto;
+}
+
+.auth-form-card {
+  width: 100%;
+  max-width: 460px;
+}
+
+.auth-form-card.wide {
+  max-width: 640px;
+}
+
+.auth-form-card .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-5);
+}
+
+.auth-form-card h1 {
+  font-size: 1.9rem;
+  margin-bottom: var(--space-2);
+}
+
+.auth-form-card > p {
+  margin-bottom: var(--space-6);
+}
+
+.auth-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--space-1) 0 var(--space-5);
+  font-size: 0.88rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-ink-soft);
+}
+
+.remember-me input {
+  accent-color: var(--color-primary);
+}
+
+.auth-options-row a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Role pills inside the login form */
+.role-pill-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.role-pill {
+  position: relative;
+}
+
+.role-pill input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.role-pill span {
+  display: block;
+  text-align: center;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  transition: all 0.15s ease;
+}
+
+.role-pill input:checked + span {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+/* -------------------------------------------------
+   ROLE SELECTION PAGE
+-------------------------------------------------- */
+.role-select-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.role-select-header {
+  text-align: center;
+  padding: var(--space-7) var(--space-5) var(--space-6);
+}
+
+.role-select-header h1 {
+  margin-bottom: var(--space-2);
+}
+
+.role-select-header p {
+  margin: 0 auto;
+}
+
+.role-cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-8);
+  width: 100%;
+}
+
+.role-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.role-card .role-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: var(--space-4);
+}
+
+.role-card.ngo .role-icon {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+}
+
+.role-card.admin .role-icon {
+  background: var(--color-surface-alt);
+  color: var(--color-ink-soft);
+}
+
+.role-card h3 {
+  margin-bottom: var(--space-2);
+}
+
+.role-card p {
+  font-size: 0.92rem;
+  flex: 1;
+}
+
+.role-card .btn {
+  margin-top: var(--space-4);
+}

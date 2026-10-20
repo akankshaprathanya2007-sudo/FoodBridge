@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donor Dashboard — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="add-food.html"><span class="nav-icon">➕</span> Add Food</a>
+        <a href="my-donations.html"><span class="nav-icon">📦</span> My Donations</a>
+        <a href="requests.html"><span class="nav-icon">📨</span> Requests</a>
+        <a href="notifications.html?role=donor"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=donor"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>Donor Dashboard</h1>
+            <span>Welcome back, Green Leaf Canteen</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="topbar-icon-btn" title="Notifications">🔔<span class="dot-badge"></span></button>
+          <div class="topbar-user">
+            <div class="avatar">GL</div>
+            <div class="user-meta">
+              <strong>Green Leaf Canteen</strong>
+              <span>Food Donor</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="page-header">
+          <div>
+            <h2>Overview</h2>
+            <p>Here's what's happening with your food donations.</p>
+          </div>
+          <a href="add-food.html" class="btn btn-accent">+ Add Food</a>
+        </div>
+
+        <div class="stat-cards">
+          <div class="mini-card">
+            <div class="mini-card-icon">📦</div>
+            <span class="mini-card-value">86</span>
+            <span class="mini-card-label">Total Donations</span>
+          </div>
+          <div class="mini-card accent">
+            <div class="mini-card-icon">🟢</div>
+            <span class="mini-card-value">6</span>
+            <span class="mini-card-label">Active Donations</span>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">📨</div>
+            <span class="mini-card-value">3</span>
+            <span class="mini-card-label">Requested Donations</span>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">✅</div>
+            <span class="mini-card-value">71</span>
+            <span class="mini-card-label">Completed Donations</span>
+          </div>
+          <div class="mini-card danger">
+            <div class="mini-card-icon">⏱️</div>
+            <span class="mini-card-value">6</span>
+            <span class="mini-card-label">Expired Donations</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Recent Donations</h3>
+            <a href="my-donations.html" class="btn btn-outline btn-sm">View All</a>
+          </div>
+
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Food</th>
+                  <th>Quantity</th>
+                  <th>Prepared Date</th>
+                  <th>Expiry</th>
+                  <th>Pickup Time</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="recentDonationsBody">
+                <!-- Rows injected by js/donor.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- View donation modal -->
+  <div class="modal-overlay" id="donationModal">
+    <div class="modal-box">
+      <button class="modal-close">✕</button>
+      <div id="donationModalBody"></div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/donor.js"></script>
+</body>
+</html>

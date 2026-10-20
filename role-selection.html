@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Your Role — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar-logo">
+        <span class="logo-mark">FW</span>
+        FoodBridge
+      </a>
+      <div class="navbar-actions">
+        <span style="font-size:0.9rem;color:var(--color-ink-soft);">Already have an account?</span>
+        <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="role-select-shell">
+    <div class="role-select-header">
+      <h1>How would you like to join FoodBridge?</h1>
+      <p>Pick the option that matches you. You can always contact support if you're unsure.</p>
+    </div>
+
+    <div class="role-cards">
+      <!-- FOOD DONOR -->
+      <div class="role-card donor">
+        <div class="role-icon">🍱</div>
+        <h3>Food Donor</h3>
+        <p>
+          For restaurants, hotels, college canteens, event halls and
+          individuals who have surplus food ready to give away.
+        </p>
+        <a href="donor-register.html" class="btn btn-primary btn-block">Continue as Donor</a>
+      </div>
+
+      <!-- NGO -->
+      <div class="role-card ngo">
+        <div class="role-icon">🤝</div>
+        <h3>NGO</h3>
+        <p>
+          For NGOs and volunteer groups who collect surplus food and
+          distribute it to people who need it.
+        </p>
+        <a href="ngo-register.html" class="btn btn-accent btn-block">Continue as NGO</a>
+      </div>
+
+      <!-- ADMIN -->
+      <div class="role-card admin">
+        <div class="role-icon">🛠️</div>
+        <h3>Admin</h3>
+        <p>
+          For system administrators who manage users, donations and
+          platform reports. Admin accounts are created internally.
+        </p>
+        <a href="login.html" class="btn btn-outline btn-block">Admin Login</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="margin-top:0;">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <span>&copy; 2026 FoodBridge. Built as a college project.</span>
+        <span>Frontend prototype — backend coming soon.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

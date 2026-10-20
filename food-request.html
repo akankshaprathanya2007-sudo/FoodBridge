@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Food — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+      <nav class="sidebar-nav">
+        <a href="ngo-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="available-food.html" class="active"><span class="nav-icon">🍽️</span> Available Food</a>
+        <a href="my-requests.html"><span class="nav-icon">📨</span> My Requests</a>
+        <a href="pickup-tracking.html"><span class="nav-icon">🚚</span> Pickup Tracking</a>
+        <a href="notifications.html?role=ngo"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=ngo"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>Request Food</h1>
+            <span>Tell the donor how much you need and when you'll collect it</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="topbar-user">
+            <div class="avatar">HT</div>
+            <div class="user-meta">
+              <strong>Hope Trust</strong>
+              <span>NGO</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="panel" style="max-width: 640px;">
+
+          <div class="request-summary-card">
+            <div class="food-thumb-lg" id="summaryIcon">🍛</div>
+            <div>
+              <h4 id="summaryName">Food Name</h4>
+              <span id="summaryMeta">Quantity available · Donor · City</span>
+            </div>
+          </div>
+
+          <div class="form-banner" id="requestBanner"></div>
+
+          <form id="foodRequestForm" novalidate>
+
+            <div class="form-section-title">NGO Details</div>
+            <div class="info-list" style="margin-bottom:var(--space-5);">
+              <div class="info-row"><span>NGO Name</span><span>Hope Trust</span></div>
+              <div class="info-row"><span>Contact Person</span><span>Priya Raj</span></div>
+              <div class="info-row"><span>Registered Beneficiaries</span><span>320</span></div>
+            </div>
+
+            <div class="form-section-title">Request Details</div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="requestedQuantity">Requested Quantity</label>
+                <input type="number" id="requestedQuantity" class="form-control" min="1" placeholder="e.g. 20" />
+                <span class="hint" id="maxQuantityHint"></span>
+                <span class="field-error" data-for="requestedQuantity"></span>
+              </div>
+              <div class="form-group">
+                <label for="peopleToServe">Number of People to Serve</label>
+                <input type="number" id="peopleToServe" class="form-control" min="1" placeholder="e.g. 40" />
+                <span class="field-error" data-for="peopleToServe"></span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="requestPickupDate">Pickup Date</label>
+                <input type="date" id="requestPickupDate" class="form-control" />
+                <span class="field-error" data-for="requestPickupDate"></span>
+              </div>
+              <div class="form-group">
+                <label for="requestPickupTime">Pickup Time</label>
+                <input type="time" id="requestPickupTime" class="form-control" />
+                <span class="field-error" data-for="requestPickupTime"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="requestMessage">Additional Message <span style="font-weight:400;color:var(--color-ink-soft);">(optional)</span></label>
+              <textarea id="requestMessage" class="form-control" placeholder="Anything the donor should know about pickup..."></textarea>
+            </div>
+
+            <div style="display:flex;gap:var(--space-3);margin-top:var(--space-5);">
+              <button type="submit" class="btn btn-primary" style="flex:1;">Submit Request</button>
+              <button type="button" id="requestCancelBtn" class="btn btn-outline" style="flex:1;">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/ngo.js"></script>
+</body>
+</html>

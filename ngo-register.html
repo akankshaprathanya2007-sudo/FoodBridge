@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NGO Registration — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="auth-shell">
+    <!-- LEFT VISUAL PANEL -->
+    <aside class="auth-visual">
+      <a href="../index.html" class="navbar-logo">
+        <span class="logo-mark">FW</span>
+        FoodBridge
+      </a>
+
+      <div class="auth-visual-copy">
+        <h2>Reach more people who need a meal</h2>
+        <p>Register your NGO to browse and request surplus food nearby.</p>
+
+        <ul class="auth-visual-points">
+          <li><span class="check">✓</span> See fresh, currently-available food listings near you</li>
+          <li><span class="check">✓</span> Request donations and schedule pickups in one place</li>
+          <li><span class="check">✓</span> Keep a record of every meal your NGO has delivered</li>
+        </ul>
+      </div>
+
+      <span class="auth-visual-foot">© 2026 FoodBridge · College Project</span>
+    </aside>
+
+    <!-- RIGHT FORM PANEL -->
+    <section class="auth-form-panel">
+      <div class="auth-form-card wide">
+        <a href="role-selection.html" class="back-link">&larr; Back to role selection</a>
+        <h1>Register your NGO</h1>
+        <p>For NGOs and volunteer groups collecting surplus food.</p>
+
+        <div class="form-banner" id="ngoRegisterBanner"></div>
+
+        <form id="ngoRegisterForm" novalidate>
+
+          <div class="form-section-title">NGO Details</div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="ngoName">NGO Name</label>
+              <input type="text" id="ngoName" class="form-control" placeholder="e.g. Hope Trust" />
+              <span class="field-error" data-for="ngoName"></span>
+            </div>
+            <div class="form-group">
+              <label for="ngoRegNumber">NGO Registration Number</label>
+              <input type="text" id="ngoRegNumber" class="form-control" placeholder="e.g. NGO/TN/2019/00123" />
+              <span class="field-error" data-for="ngoRegNumber"></span>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="ngoContactPerson">Contact Person</label>
+              <input type="text" id="ngoContactPerson" class="form-control" placeholder="e.g. Priya Raj" />
+              <span class="field-error" data-for="ngoContactPerson"></span>
+            </div>
+            <div class="form-group">
+              <label for="ngoPhone">Phone Number</label>
+              <input type="tel" id="ngoPhone" class="form-control" placeholder="10-digit mobile number" maxlength="10" />
+              <span class="field-error" data-for="ngoPhone"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ngoEmail">Email</label>
+            <input type="email" id="ngoEmail" class="form-control" placeholder="ngo@example.org" />
+            <span class="field-error" data-for="ngoEmail"></span>
+          </div>
+
+          <div class="form-section-title">Set a Password</div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="ngoPassword">Password</label>
+              <div class="password-field">
+                <input type="password" id="ngoPassword" class="form-control js-password-strength" placeholder="At least 8 characters" />
+                <button type="button" class="password-toggle">Show</button>
+              </div>
+              <div class="strength-meter">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+              </div>
+              <span class="strength-label"></span>
+              <span class="field-error" data-for="ngoPassword"></span>
+            </div>
+            <div class="form-group">
+              <label for="ngoConfirmPassword">Confirm Password</label>
+              <div class="password-field">
+                <input type="password" id="ngoConfirmPassword" class="form-control" placeholder="Re-enter your password" />
+                <button type="button" class="password-toggle">Show</button>
+              </div>
+              <span class="field-error" data-for="ngoConfirmPassword"></span>
+            </div>
+          </div>
+
+          <div class="form-section-title">Address</div>
+
+          <div class="form-group">
+            <label for="ngoAddress">Address</label>
+            <input type="text" id="ngoAddress" class="form-control" placeholder="Street, area / locality" />
+            <span class="field-error" data-for="ngoAddress"></span>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="ngoCity">City</label>
+              <input type="text" id="ngoCity" class="form-control" placeholder="e.g. Madurai" />
+              <span class="field-error" data-for="ngoCity"></span>
+            </div>
+            <div class="form-group">
+              <label for="ngoDistrict">District</label>
+              <input type="text" id="ngoDistrict" class="form-control" placeholder="e.g. Madurai" />
+              <span class="field-error" data-for="ngoDistrict"></span>
+            </div>
+            <div class="form-group">
+              <label for="ngoPincode">Pincode</label>
+              <input type="text" id="ngoPincode" class="form-control" placeholder="6-digit pincode" maxlength="6" />
+              <span class="field-error" data-for="ngoPincode"></span>
+            </div>
+          </div>
+
+          <div class="form-section-title">Operations</div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="ngoAreasServed">Areas Served</label>
+              <input type="text" id="ngoAreasServed" class="form-control" placeholder="e.g. Anna Nagar, Villapuram, Tallakulam" />
+              <span class="hint">Separate multiple areas with commas.</span>
+              <span class="field-error" data-for="ngoAreasServed"></span>
+            </div>
+            <div class="form-group">
+              <label for="ngoBeneficiaries">Number of Beneficiaries</label>
+              <input type="number" id="ngoBeneficiaries" class="form-control" placeholder="e.g. 150" min="1" />
+              <span class="hint">Approximate number of people your NGO supports.</span>
+              <span class="field-error" data-for="ngoBeneficiaries"></span>
+            </div>
+          </div>
+
+          <div class="checkbox-row" style="margin-top: var(--space-4);">
+            <input type="checkbox" id="ngoTerms" />
+            <label for="ngoTerms">
+              I agree to the <a href="#">Terms and Conditions</a> and confirm the details provided are accurate.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-accent btn-block">Register</button>
+        </form>
+
+        <p class="form-footer-note">
+          Already have an account? <a href="login.html">Login</a>
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+</body>
+</html>

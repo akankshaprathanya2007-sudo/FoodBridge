@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Food — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+      <nav class="sidebar-nav">
+        <a href="ngo-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="available-food.html" class="active"><span class="nav-icon">🍽️</span> Available Food</a>
+        <a href="my-requests.html"><span class="nav-icon">📨</span> My Requests</a>
+        <a href="pickup-tracking.html"><span class="nav-icon">🚚</span> Pickup Tracking</a>
+        <a href="notifications.html?role=ngo"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=ngo"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>Available Food</h1>
+            <span>Browse surplus food currently listed by donors</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="topbar-user">
+            <div class="avatar">HT</div>
+            <div class="user-meta">
+              <strong>Hope Trust</strong>
+              <span>NGO</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="panel">
+          <div class="filter-bar">
+            <div class="search-box">
+              <span class="icon">🔍</span>
+              <input type="text" id="foodSearch" class="form-control" placeholder="Search food name..." />
+            </div>
+
+            <select id="categoryFilter" class="form-control">
+              <option value="all">All Categories</option>
+              <option>Rice</option>
+              <option>Curry</option>
+              <option>Vegetables</option>
+              <option>Fruits</option>
+              <option>Bakery</option>
+              <option>Snacks</option>
+              <option>Packaged Food</option>
+              <option>Beverages</option>
+              <option>Other</option>
+            </select>
+
+            <select id="vegFilter" class="form-control">
+              <option value="all">Veg &amp; Non-Veg</option>
+              <option value="veg">Vegetarian</option>
+              <option value="nonveg">Non-Vegetarian</option>
+            </select>
+
+            <select id="cityFilter" class="form-control">
+              <option value="all">All Cities</option>
+              <option value="Madurai">Madurai</option>
+            </select>
+
+            <select id="sortSelect" class="form-control">
+              <option value="newest">Newest First</option>
+              <option value="expiring">Expiring Soon</option>
+              <option value="quantity">Highest Quantity</option>
+            </select>
+          </div>
+
+          <div class="food-grid" id="availableFoodGrid">
+            <!-- Cards injected by js/ngo.js -->
+          </div>
+
+          <div class="empty-state" id="foodEmptyState" style="display:none;">
+            <div class="empty-icon">🍽️</div>
+            <p>No available food matches your search or filters.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/ngo.js"></script>
+</body>
+</html>

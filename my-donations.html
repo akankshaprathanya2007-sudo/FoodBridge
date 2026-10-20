@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Donations — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="add-food.html"><span class="nav-icon">➕</span> Add Food</a>
+        <a href="my-donations.html" class="active"><span class="nav-icon">📦</span> My Donations</a>
+        <a href="requests.html"><span class="nav-icon">📨</span> Requests</a>
+        <a href="notifications.html?role=donor"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=donor"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>My Donations</h1>
+            <span>All the food you've listed on FoodBridge</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="topbar-icon-btn" title="Notifications">🔔<span class="dot-badge"></span></button>
+          <div class="topbar-user">
+            <div class="avatar">GL</div>
+            <div class="user-meta">
+              <strong>Green Leaf Canteen</strong>
+              <span>Food Donor</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="page-header">
+          <div>
+            <h2>Donations</h2>
+            <p>Search, filter and manage every donation you've listed.</p>
+          </div>
+          <a href="add-food.html" class="btn btn-accent">+ Add Food</a>
+        </div>
+
+        <div class="panel">
+          <div class="table-toolbar">
+            <div class="search-box">
+              <span class="icon">🔍</span>
+              <input type="text" id="donationSearch" class="form-control" placeholder="Search by food name or category..." />
+            </div>
+
+            <select id="statusFilter" class="form-control">
+              <option value="all">All Statuses</option>
+              <option value="available">Available</option>
+              <option value="requested">Requested</option>
+              <option value="accepted">Accepted</option>
+              <option value="pickup">Pickup Scheduled</option>
+              <option value="pickedup">Picked Up</option>
+              <option value="delivered">Delivered</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="expired">Expired</option>
+            </select>
+
+            <select id="sortSelect" class="form-control">
+              <option value="newest">Newest First</option>
+              <option value="expiring">Expiring Soon</option>
+              <option value="quantity">Highest Quantity</option>
+            </select>
+          </div>
+
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Food</th>
+                  <th>Quantity</th>
+                  <th>Prepared</th>
+                  <th>Expiry</th>
+                  <th>Pickup Window</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="myDonationsBody">
+                <!-- Rows injected by js/donor.js -->
+              </tbody>
+            </table>
+
+            <div class="empty-state" id="donationsEmptyState" style="display:none;">
+              <div class="empty-icon">🍽️</div>
+              <p>No donations match your search or filter.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="donationModal">
+    <div class="modal-box">
+      <button class="modal-close">✕</button>
+      <div id="donationModalBody"></div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/donor.js"></script>
+</body>
+</html>

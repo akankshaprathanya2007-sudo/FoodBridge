@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Dashboard — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <style>
+    #staffMap { height: 420px; border-radius: 12px; margin-bottom: 24px; }
+    .donation-card { border: 1px solid #e3e8e3; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; background: #fff; }
+    .donation-card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .donation-card small { color: #6b7a6b; }
+    .ngo-list { margin: 10px 0 0; padding-left: 18px; font-size: 0.9rem; }
+    .ngo-list li strong { color: #2e7d32; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo"><span class="logo-mark">FW</span> FoodBridge</a>
+      <div class="sidebar-section-label">Staff</div>
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="active"><span class="nav-icon">🗺️</span> Live Donations</a>
+      </nav>
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav"><a href="login.html"><span class="nav-icon">🚪</span> Logout</a></nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div class="topbar-title">
+          <h1>Staff Dashboard</h1>
+          <span id="updated">Loading…</span>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="panel">
+          <div id="staffMap"></div>
+          <div id="donationList"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    var API = "http://127.0.0.1:5000/api/admin/donations";
+    var key = sessionStorage.getItem("admin_key") || prompt("Enter staff key");
+    if (key) sessionStorage.setItem("admin_key", key);
+
+    var map = L.map("staffMap").setView([9.9252, 78.1198], 11);
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 19,
+      attribution: "Tiles &copy; Esri, HERE, Garmin, OpenStreetMap contributors"
+    }).addTo(map);
+
+    var layer = L.layerGroup().addTo(map);
+    var first = true;
+
+    function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : t; return d.innerHTML; }
+
+    function refresh() {
+      fetch(API, { headers: { "X-Admin-Key": key } })
+        .then(function (r) {
+          if (r.status === 401) { sessionStorage.removeItem("admin_key"); throw new Error("Wrong staff key"); }
+          return r.json();
+        })
+        .then(function (data) {
+          layer.clearLayers();
+          var list = document.getElementById("donationList");
+          list.innerHTML = "";
+
+          data.forEach(function (d) {
+            L.marker([d.latitude, d.longitude]).addTo(layer)
+              .bindPopup("<b>" + esc(d.food_name) + "</b><br>" + esc(d.pickup_address));
+
+            (d.nearest_ngos || []).forEach(function (n, i) {
+              L.circleMarker([n.latitude, n.longitude], { radius: 7, color: i === 0 ? "#2e7d32" : "#1565c0" })
+                .addTo(layer).bindPopup("NGO: " + esc(n.ngo_name) + " (" + n.distance_km + " km)");
+            });
+
+            var ngos = (d.nearest_ngos || []).map(function (n, i) {
+              return "<li>" + (i === 0 ? "<strong>" : "") + esc(n.ngo_name) + " — " + n.distance_km + " km" +
+                     (i === 0 ? "</strong>" : "") + " · " + esc(n.contact_person) + " (" + esc(n.phone) + ")</li>";
+            }).join("") || "<li>No NGO with location yet</li>";
+
+            list.insertAdjacentHTML("beforeend",
+              '<div class="donation-card"><h3>#' + d.id + " " + esc(d.food_name) + " — " + d.quantity + " " + esc(d.unit) + "</h3>" +
+              "<small>Donor: " + esc(d.donor_name) + " · " + esc(d.pickup_address) + ", " + esc(d.city) +
+              " · Pickup " + esc(d.pickup_from) + "–" + esc(d.pickup_until) + "</small>" +
+              '<ol class="ngo-list">' + ngos + "</ol></div>");
+          });
+
+          if (first && data.length) {
+            map.fitBounds(data.map(function (d) { return [d.latitude, d.longitude]; }), { padding: [40, 40] });
+            first = false;
+          }
+          document.getElementById("updated").textContent = data.length + " active donation(s) · updated " + new Date().toLocaleTimeString();
+        })
+        .catch(function (e) { document.getElementById("updated").textContent = e.message || "Cannot reach server"; });
+    }
+
+    refresh();
+    setInterval(refresh, 5000);
+  </script>
+</body>
+</html>

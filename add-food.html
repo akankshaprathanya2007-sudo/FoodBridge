@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Food — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="add-food.html" class="active"><span class="nav-icon">➕</span> Add Food</a>
+        <a href="my-donations.html"><span class="nav-icon">📦</span> My Donations</a>
+        <a href="requests.html"><span class="nav-icon">📨</span> Requests</a>
+        <a href="notifications.html?role=donor"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=donor"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>Add Food Donation</h1>
+            <span>List surplus food for NGOs to request</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="topbar-user">
+            <div class="avatar">GL</div>
+            <div class="user-meta">
+              <strong>Green Leaf Canteen</strong>
+              <span>Food Donor</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="panel" style="max-width: 860px;">
+          <div class="form-banner" id="addFoodBanner"></div>
+
+          <form id="addFoodForm" novalidate>
+
+            <!-- FOOD DETAILS -->
+            <div class="form-section-title">Food Details</div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="foodName">Food Name</label>
+                <input type="text" id="foodName" class="form-control" placeholder="e.g. Vegetable Rice" />
+                <span class="field-error" data-for="foodName"></span>
+              </div>
+              <div class="form-group">
+                <label for="foodCategory">Food Category</label>
+                <select id="foodCategory" class="form-control">
+                  <option value="">Select category</option>
+                  <option>Rice</option>
+                  <option>Curry</option>
+                  <option>Vegetables</option>
+                  <option>Fruits</option>
+                  <option>Bakery</option>
+                  <option>Snacks</option>
+                  <option>Packaged Food</option>
+                  <option>Beverages</option>
+                  <option>Other</option>
+                </select>
+                <span class="field-error" data-for="foodCategory"></span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="foodType">Food Type</label>
+                <select id="foodType" class="form-control">
+                  <option value="">Select type</option>
+                  <option>Freshly Cooked</option>
+                  <option>Packaged / Sealed</option>
+                  <option>Raw Ingredients</option>
+                </select>
+                <span class="field-error" data-for="foodType"></span>
+              </div>
+              <div class="form-group">
+                <label>Vegetarian / Non-Vegetarian</label>
+                <div class="role-pill-group" style="grid-template-columns:1fr 1fr;">
+                  <label class="role-pill">
+                    <input type="radio" name="vegType" value="veg" />
+                    <span>Vegetarian</span>
+                  </label>
+                  <label class="role-pill">
+                    <input type="radio" name="vegType" value="nonveg" />
+                    <span>Non-Vegetarian</span>
+                  </label>
+                </div>
+                <span class="field-error" id="vegTypeError">Please select vegetarian or non-vegetarian.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="foodDescription">Description <span style="font-weight:400;color:var(--color-ink-soft);">(optional)</span></label>
+              <textarea id="foodDescription" class="form-control" placeholder="Any extra detail about the food..."></textarea>
+            </div>
+
+            <!-- QUANTITY -->
+            <div class="form-section-title">Quantity</div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="form-control" min="1" placeholder="e.g. 20" />
+                <span class="field-error" data-for="quantity"></span>
+              </div>
+              <div class="form-group">
+                <label for="unit">Unit</label>
+                <select id="unit" class="form-control">
+                  <option value="">Select unit</option>
+                  <option>Kg</option>
+                  <option>Litres</option>
+                  <option>Packets</option>
+                  <option>Boxes</option>
+                  <option>Portions</option>
+                </select>
+                <span class="field-error" data-for="unit"></span>
+              </div>
+              <div class="form-group">
+                <label for="servable">Number of People Servable</label>
+                <input type="number" id="servable" class="form-control" min="1" placeholder="e.g. 40" />
+                <span class="field-error" data-for="servable"></span>
+              </div>
+            </div>
+
+            <!-- PREPARATION -->
+            <div class="form-section-title">Preparation Details</div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="prepDate">Preparation Date</label>
+                <input type="date" id="prepDate" class="form-control" />
+                <span class="field-error" data-for="prepDate"></span>
+              </div>
+              <div class="form-group">
+                <label for="prepTime">Preparation Time</label>
+                <input type="time" id="prepTime" class="form-control" />
+                <span class="field-error" data-for="prepTime"></span>
+              </div>
+            </div>
+
+            <!-- EXPIRY -->
+            <div class="form-section-title">Expiry Details</div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="bestBeforeDate">Best Before Date</label>
+                <input type="date" id="bestBeforeDate" class="form-control" />
+                <span class="field-error" data-for="bestBeforeDate"></span>
+              </div>
+              <div class="form-group">
+                <label for="bestBeforeTime">Best Before Time</label>
+                <input type="time" id="bestBeforeTime" class="form-control" />
+                <span class="field-error" data-for="bestBeforeTime"></span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="date" id="expiryDate" class="form-control" />
+                <span class="hint">Must be after the preparation date &amp; time, and not in the past.</span>
+                <span class="field-error" data-for="expiryDate"></span>
+              </div>
+              <div class="form-group">
+                <label for="expiryTime">Expiry Time</label>
+                <input type="time" id="expiryTime" class="form-control" />
+                <span class="field-error" data-for="expiryTime"></span>
+              </div>
+            </div>
+
+            <!-- PICKUP -->
+            <div class="form-section-title">Pickup Details</div>
+
+            <div class="form-group">
+              <label for="pickupAddress">Pickup Address</label>
+              <input type="text" id="pickupAddress" class="form-control" placeholder="Street, area / locality" />
+              <span class="field-error" data-for="pickupAddress"></span>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label for="pickupCity">City</label>
+                <input type="text" id="pickupCity" class="form-control" placeholder="e.g. Madurai" />
+                <span class="field-error" data-for="pickupCity"></span>
+              </div>
+              <div class="form-group">
+                <label for="pickupDistrict">District</label>
+                <input type="text" id="pickupDistrict" class="form-control" placeholder="e.g. Madurai" />
+                <span class="field-error" data-for="pickupDistrict"></span>
+              </div>
+              <div class="form-group">
+                <label for="pickupPincode">Pincode</label>
+                <input type="text" id="pickupPincode" class="form-control" placeholder="6-digit pincode" maxlength="6" />
+                <span class="field-error" data-for="pickupPincode"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Pickup Location (GPS)</label>
+              <button type="button" class="btn btn-outline" id="useLocationBtn">📍 Use my current location</button>
+              <span class="hint" id="locationStatus">Optional. If skipped, we find it from the address above.</span>
+              <input type="hidden" id="pickupLat" />
+              <input type="hidden" id="pickupLng" />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="pickupFrom">Available From</label>
+                <input type="time" id="pickupFrom" class="form-control" />
+                <span class="field-error" data-for="pickupFrom"></span>
+              </div>
+              <div class="form-group">
+                <label for="pickupUntil">Available Until</label>
+                <input type="time" id="pickupUntil" class="form-control" />
+                <span class="field-error" data-for="pickupUntil"></span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="contactPerson">Contact Person</label>
+                <input type="text" id="contactPerson" class="form-control" placeholder="Name of the pickup contact" />
+                <span class="field-error" data-for="contactPerson"></span>
+              </div>
+              <div class="form-group">
+                <label for="contactNumber">Contact Number</label>
+                <input type="tel" id="contactNumber" class="form-control" placeholder="10-digit mobile number" maxlength="10" />
+                <span class="field-error" data-for="contactNumber"></span>
+              </div>
+            </div>
+
+            <!-- ADDITIONAL INFO -->
+            <div class="form-section-title">Additional Information</div>
+
+            <div class="form-group">
+              <label for="specialInstructions">Special Instructions <span style="font-weight:400;color:var(--color-ink-soft);">(optional)</span></label>
+              <input type="text" id="specialInstructions" class="form-control" placeholder="e.g. Consume within 4 hours" />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="allergens">Allergens <span style="font-weight:400;color:var(--color-ink-soft);">(optional)</span></label>
+                <input type="text" id="allergens" class="form-control" placeholder="e.g. Contains nuts" />
+              </div>
+              <div class="form-group">
+                <label for="storageRequirements">Storage Requirements <span style="font-weight:400;color:var(--color-ink-soft);">(optional)</span></label>
+                <input type="text" id="storageRequirements" class="form-control" placeholder="e.g. Keep refrigerated" />
+              </div>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="form-section-title">Food Image</div>
+
+            <div class="image-upload-box" id="imageUploadBox">
+              <div class="upload-icon">📷</div>
+              <p>Click or drag a photo of the food here</p>
+              <span>JPG, JPEG or PNG · Max 5MB</span>
+              <input type="file" id="foodImageInput" accept=".jpg,.jpeg,.png" style="display:none;" />
+            </div>
+            <span class="field-error show" id="imageWarning" style="display:block;"></span>
+
+            <div class="image-preview-row" id="imagePreviewRow" style="display:none;">
+              <img id="imagePreviewImg" src="" alt="Food preview" />
+              <span id="imagePreviewName" style="font-size:0.85rem;color:var(--color-ink-soft);"></span>
+            </div>
+
+            <!-- SAFETY -->
+            <div class="form-section-title">Food Safety Confirmation</div>
+
+            <div class="safety-checklist">
+              <div class="checkbox-row">
+                <input type="checkbox" id="safety1" />
+                <label for="safety1">Food was prepared hygienically.</label>
+              </div>
+              <div class="checkbox-row">
+                <input type="checkbox" id="safety2" />
+                <label for="safety2">Food is suitable for consumption.</label>
+              </div>
+              <div class="checkbox-row">
+                <input type="checkbox" id="safety3" />
+                <label for="safety3">Food has been stored properly.</label>
+              </div>
+              <div class="checkbox-row">
+                <input type="checkbox" id="safety4" />
+                <label for="safety4">Food has not crossed its expiry time.</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" style="margin-top: var(--space-6);">Submit Donation</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/donor.js"></script>
+</body>
+</html>

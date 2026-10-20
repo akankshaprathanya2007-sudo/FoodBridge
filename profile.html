@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+
+      <nav class="sidebar-nav" data-role-nav="donor">
+        <a href="donor-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="add-food.html"><span class="nav-icon">➕</span> Add Food</a>
+        <a href="my-donations.html"><span class="nav-icon">📦</span> My Donations</a>
+        <a href="requests.html"><span class="nav-icon">📨</span> Requests</a>
+        <a href="notifications.html?role=donor"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=donor" class="active"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <nav class="sidebar-nav" data-role-nav="ngo">
+        <a href="ngo-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="available-food.html"><span class="nav-icon">🍽️</span> Available Food</a>
+        <a href="my-requests.html"><span class="nav-icon">📨</span> My Requests</a>
+        <a href="pickup-tracking.html"><span class="nav-icon">🚚</span> Pickup Tracking</a>
+        <a href="notifications.html?role=ngo"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=ngo" class="active"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>Profile</h1>
+            <span>View and update your account details</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="topbar-user" data-role-view="donor">
+            <div class="avatar">GL</div>
+            <div class="user-meta"><strong>Green Leaf Canteen</strong><span>Food Donor</span></div>
+          </div>
+          <div class="topbar-user" data-role-view="ngo">
+            <div class="avatar">HT</div>
+            <div class="user-meta"><strong>Hope Trust</strong><span>NGO</span></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="panel" style="max-width:640px;">
+
+          <div class="profile-header" data-role-view="donor">
+            <div class="avatar-lg">GL</div>
+            <div>
+              <h2>Green Leaf Canteen</h2>
+              <span>Food Donor · Member since Jan 2026</span>
+            </div>
+          </div>
+
+          <div class="profile-header" data-role-view="ngo">
+            <div class="avatar-lg">HT</div>
+            <div>
+              <h2>Hope Trust</h2>
+              <span>NGO · Member since Mar 2025</span>
+            </div>
+          </div>
+
+          <div class="form-banner" id="profileBanner"></div>
+
+          <form id="profileForm">
+
+            <!-- DONOR FIELDS -->
+            <div data-role-view="donor">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pfDonorName">Full Name</label>
+                  <input type="text" id="pfDonorName" class="form-control" value="Ramesh Kumar" />
+                </div>
+                <div class="form-group">
+                  <label for="pfDonorOrg">Organization Name</label>
+                  <input type="text" id="pfDonorOrg" class="form-control" value="Green Leaf Canteen" />
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pfDonorEmail">Email</label>
+                  <input type="email" id="pfDonorEmail" class="form-control" value="contact@greenleafcanteen.example" />
+                </div>
+                <div class="form-group">
+                  <label for="pfDonorPhone">Phone</label>
+                  <input type="tel" id="pfDonorPhone" class="form-control" value="9876543210" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pfDonorAddress">Address</label>
+                <input type="text" id="pfDonorAddress" class="form-control" value="12 College Road" />
+              </div>
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label for="pfDonorCity">City</label>
+                  <input type="text" id="pfDonorCity" class="form-control" value="Madurai" />
+                </div>
+                <div class="form-group">
+                  <label for="pfDonorDistrict">District</label>
+                  <input type="text" id="pfDonorDistrict" class="form-control" value="Madurai" />
+                </div>
+                <div class="form-group">
+                  <label for="pfDonorPincode">Pincode</label>
+                  <input type="text" id="pfDonorPincode" class="form-control" value="625001" />
+                </div>
+              </div>
+            </div>
+
+            <!-- NGO FIELDS -->
+            <div data-role-view="ngo">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pfNgoName">NGO Name</label>
+                  <input type="text" id="pfNgoName" class="form-control" value="Hope Trust" />
+                </div>
+                <div class="form-group">
+                  <label for="pfNgoRegNumber">Registration Number</label>
+                  <input type="text" id="pfNgoRegNumber" class="form-control" value="NGO/TN/2019/00123" />
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pfNgoContact">Contact Person</label>
+                  <input type="text" id="pfNgoContact" class="form-control" value="Priya Raj" />
+                </div>
+                <div class="form-group">
+                  <label for="pfNgoPhone">Phone</label>
+                  <input type="tel" id="pfNgoPhone" class="form-control" value="9876512345" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pfNgoEmail">Email</label>
+                <input type="email" id="pfNgoEmail" class="form-control" value="contact@hopetrust.example" />
+              </div>
+              <div class="form-group">
+                <label for="pfNgoAddress">Address</label>
+                <input type="text" id="pfNgoAddress" class="form-control" value="27 Villapuram Main Road" />
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="pfNgoAreas">Areas Served</label>
+                  <input type="text" id="pfNgoAreas" class="form-control" value="Anna Nagar, Villapuram, Tallakulam" />
+                </div>
+                <div class="form-group">
+                  <label for="pfNgoBeneficiaries">Number of Beneficiaries</label>
+                  <input type="number" id="pfNgoBeneficiaries" class="form-control" value="320" />
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:var(--space-3);margin-top:var(--space-5);">
+              <button type="button" id="profileEditBtn" class="btn btn-primary">Edit Profile</button>
+              <button type="submit" id="profileSaveBtn" class="btn btn-primary" style="display:none;">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/donor.js"></script>
+  <script src="../js/ngo.js"></script>
+</body>
+</html>

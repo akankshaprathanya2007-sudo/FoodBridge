@@ -1,0 +1,1001 @@
+/* =======================================================
+   DASHBOARD.CSS
+   =======================================================
+   Shared styles for every dashboard page: Donor, NGO and
+   Admin. Load order on dashboard pages:
+   style.css -> dashboard.css -> responsive.css
+   ======================================================= */
+
+/* -------------------------------------------------
+   1. LAYOUT SHELL
+-------------------------------------------------- */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* -------------------------------------------------
+   2. SIDEBAR
+-------------------------------------------------- */
+.sidebar {
+  background: var(--color-primary-dark);
+  color: #dcebe0;
+  padding: var(--space-5) var(--space-4);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  padding: var(--space-2) var(--space-2) var(--space-6);
+}
+
+.sidebar-logo .logo-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-section-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7fa287;
+  padding: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.7rem var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #cfe0d3;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-nav a .nav-icon {
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sidebar-nav a.active {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* -------------------------------------------------
+   3. TOPBAR
+-------------------------------------------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.topbar-title h1 {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.topbar-title span {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.topbar-icon-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.topbar-icon-btn .dot-badge {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-danger);
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.topbar-user .avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.topbar-user .user-meta strong {
+  display: block;
+  font-size: 0.88rem;
+}
+
+.topbar-user .user-meta span {
+  font-size: 0.76rem;
+  color: var(--color-ink-soft);
+}
+
+.sidebar-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle span {
+  width: 18px;
+  height: 2px;
+  background: var(--color-ink);
+  border-radius: 2px;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+/* -------------------------------------------------
+   4. MAIN CONTENT AREA
+-------------------------------------------------- */
+.dashboard-main {
+  padding: var(--space-6);
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.page-header h2 {
+  margin-bottom: var(--space-1);
+}
+
+.page-header p {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------
+   5. STAT CARDS
+-------------------------------------------------- */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.stat-cards.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-cards.cols-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.mini-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.mini-card .mini-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-3);
+}
+
+.mini-card.accent .mini-card-icon {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+}
+
+.mini-card.danger .mini-card-icon {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.mini-card .mini-card-value {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.mini-card .mini-card-label {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+/* -------------------------------------------------
+   6. PANELS / CARD SECTIONS
+-------------------------------------------------- */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.panel-head h3 {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+/* -------------------------------------------------
+   7. TOOLBAR (search / filter / sort)
+-------------------------------------------------- */
+.table-toolbar {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.table-toolbar .search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.table-toolbar .search-box input {
+  padding-left: 2.4rem;
+}
+
+.table-toolbar .search-box .icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-ink-soft);
+}
+
+.table-toolbar select {
+  min-width: 150px;
+}
+
+/* -------------------------------------------------
+   8. DATA TABLE
+-------------------------------------------------- */
+.data-table-wrap {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.data-table th {
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-soft);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+  background: var(--color-surface-alt);
+}
+
+.data-table .food-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.data-table .food-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.data-table .row-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.icon-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.icon-btn.danger:hover {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-7) var(--space-4);
+  color: var(--color-ink-soft);
+}
+
+.empty-state .empty-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-3);
+}
+
+/* -------------------------------------------------
+   9. IMAGE UPLOAD BOX (Add Food page)
+-------------------------------------------------- */
+.image-upload-box {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  background: var(--color-surface-alt);
+}
+
+.image-upload-box:hover,
+.image-upload-box.dragover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.image-upload-box .upload-icon {
+  font-size: 1.8rem;
+  margin-bottom: var(--space-2);
+}
+
+.image-upload-box p {
+  margin-bottom: var(--space-1);
+  font-size: 0.9rem;
+}
+
+.image-upload-box span {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+.image-preview-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.image-preview-row img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+/* -------------------------------------------------
+   10. FOOD SAFETY CHECKLIST
+-------------------------------------------------- */
+.safety-checklist {
+  background: var(--color-accent-soft);
+  border: 1px solid #f0d9a8;
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+}
+
+.safety-checklist .checkbox-row:last-child {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------
+   11. MODAL (view details)
+-------------------------------------------------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 42, 34, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 200;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  max-width: 560px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: var(--space-6);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.modal-box h3 {
+  margin-bottom: var(--space-4);
+  padding-right: var(--space-6);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3) var(--space-5);
+  margin-bottom: var(--space-4);
+}
+
+.detail-grid .detail-item span {
+  display: block;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+  margin-bottom: 2px;
+}
+
+.detail-grid .detail-item strong {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------
+   12. STATUS BADGE COLOR MAP (used across tables)
+-------------------------------------------------- */
+.badge-status-available   { background: var(--color-primary-soft); color: var(--color-primary-dark); }
+.badge-status-requested   { background: var(--color-accent-soft); color: var(--color-accent-dark); }
+.badge-status-accepted    { background: #e2edf7; color: #2b6aa1; }
+.badge-status-pickup      { background: #ece3f7; color: #6b3fa0; }
+.badge-status-pickedup    { background: #ece3f7; color: #6b3fa0; }
+.badge-status-delivered   { background: var(--color-primary-soft); color: var(--color-primary-dark); }
+.badge-status-completed   { background: var(--color-primary-soft); color: var(--color-primary-dark); }
+.badge-status-cancelled   { background: var(--color-surface-alt); color: var(--color-ink-soft); }
+.badge-status-expired     { background: var(--color-danger-soft); color: var(--color-danger); }
+.badge-status-rejected    { background: var(--color-danger-soft); color: var(--color-danger); }
+
+/* -------------------------------------------------
+   14. FOOD CARD GRID (Available Food page)
+-------------------------------------------------- */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.food-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.food-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.food-card .food-card-image {
+  height: 140px;
+  background: linear-gradient(135deg, var(--color-primary-soft), var(--color-accent-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  position: relative;
+}
+
+.food-card .food-card-image .badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+}
+
+.food-card .food-card-body {
+  padding: var(--space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-card h4 {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.food-card .food-card-meta {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+.food-card .food-card-meta span {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.food-card .food-card-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.food-card .food-card-actions .btn {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* -------------------------------------------------
+   15. FILTER BAR (Available Food page)
+-------------------------------------------------- */
+.filter-bar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.filter-bar .search-box {
+  grid-column: span 2;
+  position: relative;
+}
+
+.filter-bar .search-box input {
+  padding-left: 2.4rem;
+}
+
+.filter-bar .search-box .icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-ink-soft);
+}
+
+/* -------------------------------------------------
+   16. FOOD DETAILS PAGE
+-------------------------------------------------- */
+.details-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.details-hero-image {
+  height: 260px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary-soft), var(--color-accent-soft));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  border: 1px solid var(--color-border);
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.info-list .info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.92rem;
+}
+
+.info-list .info-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info-list .info-row span:first-child {
+  color: var(--color-ink-soft);
+}
+
+.info-list .info-row span:last-child {
+  font-weight: 600;
+  text-align: right;
+}
+
+.notice-box {
+  background: var(--color-accent-soft);
+  border: 1px solid #f0d9a8;
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  font-size: 0.88rem;
+  color: var(--color-ink);
+}
+
+.notice-box strong {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+/* -------------------------------------------------
+   17. REQUEST SUMMARY CARD (Food Request page)
+-------------------------------------------------- */
+.request-summary-card {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-5);
+}
+
+.request-summary-card .food-thumb-lg {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.request-summary-card h4 {
+  margin-bottom: 2px;
+}
+
+.request-summary-card span {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+
+/* -------------------------------------------------
+   18. FRESHNESS BADGE (Food Details page)
+-------------------------------------------------- */
+.freshness-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.freshness-fresh { background: var(--color-primary-soft); color: var(--color-primary-dark); }
+.freshness-near { background: var(--color-accent-soft); color: var(--color-accent-dark); }
+.freshness-expired { background: var(--color-danger-soft); color: var(--color-danger); }
+
+/* -------------------------------------------------
+   19. NOTIFICATIONS LIST
+-------------------------------------------------- */
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.notification-item.unread {
+  background: var(--color-primary-soft);
+  border-color: #cfe3d4;
+}
+
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.notification-body {
+  flex: 1;
+}
+
+.notification-body p {
+  margin-bottom: 2px;
+  color: var(--color-ink);
+  font-size: 0.92rem;
+}
+
+.notification-time {
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+}
+
+.mark-read-btn {
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------
+   20. ROLE SWITCH LINKS (Notifications / Profile demo pages)
+-------------------------------------------------- */
+.role-switch-row {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 3px;
+  margin-bottom: var(--space-5);
+}
+
+.role-switch-row a {
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.role-switch-row a.active-role {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* -------------------------------------------------
+   21. PROFILE PAGE
+-------------------------------------------------- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.profile-header .avatar-lg {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile-header h2 {
+  margin-bottom: 2px;
+}
+
+.profile-header span {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+}
+
+/* -------------------------------------------------
+   22. PICKUP TRACKING TIMELINE
+-------------------------------------------------- */
+.tracking-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: var(--space-5) 0 var(--space-6);
+}
+
+.tracking-step {
+  display: flex;
+  gap: var(--space-4);
+  position: relative;
+  padding-bottom: var(--space-6);
+}
+
+.tracking-step:last-child {
+  padding-bottom: 0;
+}
+
+.tracking-step::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.tracking-step:last-child::before {
+  display: none;
+}
+
+.tracking-step.done::before {
+  background: var(--color-primary);
+}
+
+.tracking-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.tracking-step.done .tracking-dot {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.tracking-step.current .tracking-dot {
+  border-color: var(--color-accent);
+  color: var(--color-accent-dark);
+}
+
+.tracking-step h4 {
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.tracking-step span {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}

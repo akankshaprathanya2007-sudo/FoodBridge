@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications — FoodBridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- This page is shared by Donor and NGO. js/main.js reads
+         ?role=donor|ngo from the URL and shows only the matching
+         nav block below. -->
+    <aside class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-logo">
+        <span class="logo-mark">FW</span> FoodBridge
+      </a>
+
+      <div class="sidebar-section-label">Menu</div>
+
+      <nav class="sidebar-nav" data-role-nav="donor">
+        <a href="donor-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="add-food.html"><span class="nav-icon">➕</span> Add Food</a>
+        <a href="my-donations.html"><span class="nav-icon">📦</span> My Donations</a>
+        <a href="requests.html"><span class="nav-icon">📨</span> Requests</a>
+        <a href="notifications.html?role=donor" class="active"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=donor"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <nav class="sidebar-nav" data-role-nav="ngo">
+        <a href="ngo-dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+        <a href="available-food.html"><span class="nav-icon">🍽️</span> Available Food</a>
+        <a href="my-requests.html"><span class="nav-icon">📨</span> My Requests</a>
+        <a href="pickup-tracking.html"><span class="nav-icon">🚚</span> Pickup Tracking</a>
+        <a href="notifications.html?role=ngo" class="active"><span class="nav-icon">🔔</span> Notifications</a>
+        <a href="profile.html?role=ngo"><span class="nav-icon">👤</span> Profile</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <nav class="sidebar-nav">
+          <a href="login.html"><span class="nav-icon">🚪</span> Logout</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:var(--space-3);">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-title">
+            <h1>Notifications</h1>
+            <span>Stay updated on your donations and requests</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="topbar-user" data-role-view="donor">
+            <div class="avatar">GL</div>
+            <div class="user-meta"><strong>Green Leaf Canteen</strong><span>Food Donor</span></div>
+          </div>
+          <div class="topbar-user" data-role-view="ngo">
+            <div class="avatar">HT</div>
+            <div class="user-meta"><strong>Hope Trust</strong><span>NGO</span></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="panel" style="max-width:720px;">
+          <div class="panel-head">
+            <h3>Recent Notifications</h3>
+            <button class="btn btn-outline btn-sm" id="markAllReadBtn">Mark all as read</button>
+          </div>
+
+          <div class="notifications-list" id="notificationsList">
+            <!-- Rows injected by js/main.js -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/donor.js"></script>
+  <script src="../js/ngo.js"></script>
+</body>
+</html>
